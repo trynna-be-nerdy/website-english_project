@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Data Security</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+  <script src="search_bar.js" defer></script>
+
+</head>
+<body>
+  <a class = 'fix-me button' href="home.html">HOME</a>
+
+  <div class="nav">
+    <nav>
+      <div class="nav">
+        <a href="home.html"><img src="DS_logo.jpeg" alt="home" width="50"  height ='50'></a> 
+        <ul>
+        <li><a href="ATI.html">About the Issue</a></li>
+        <li><a href="Causes.html">Causes/Impacts</a></li>
+        <li><a href="Solution.html">Solutions</a></li>
+        <li><a href="Action.html">Solutions</a></li>
+        <li><a href="Resources.html">Resources</a></li>
+        </ul>
+        <form>
+          <div class="search">
+            <span class="search-icon material-symbols-outlined">search</span>
+            <input class ="search-input" type="search" placeholder="Search">  
+          </div>
+          <div class="search-results"></div>
+        </form>  
+      </div>
+    </nav>
+  </div>
+  <div class = "quote">
+    <section id="showcase">
+      <div class = "container">
+        <div class="quote">
+          <h1>"The cost of data breaches will reach approximately $10.5 Trillion annually by 2025." - Cybercrime</h1>
+          <p><em>Research project by Krishn Srivastava</em></p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <br>
+  <div class = "container"> 
+    <section id = "main">
+      <div class="card">
+        <h2>Welcome!</h2>
+        <p>This is a research project conducted by Krishn, focuses on the impacts of Machine Learning in the feilds of data or cyber security. Furthermore, understanding how Machine Learning is implimented in detecting and preventing unauthorized real-time access to data. This project is developed based of the question ,below of this context, I will be answering throughout this project.</p>
+        <br>
+          <h2>How effective are Machine Learning algorithms in detecting and preventing unauthorized real-time access to data?
+          </h2>
+        <br>
+        <br>
+        <h2>Importance of Machine Learning in Data Security</h2>
+        <p>Machine Learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being <strong><em>"explicitly programmed (Mr.Clark 2025)."</em></strong> In the context of data security, Machine Learning algorithms can analyze vast amounts of data, identify patterns, and detect <strong><em>"anomalies(Mr.Clark 2025)"</em></strong> or an inconsistency with the data, which may indicate unauthorized access or potential breaches. By continuously learning from new data, these algorithms can adapt to evolving threats and enhance the overall security posture of organizations.</p>
+    <br>
+    <br>
+      <h2>Impacts of Data breaches to the people
+      </h2>
+      <p>According to a research study conducted by Lorenzaj, as data breaches become more common, leveraging advanced technologies like Machine Learning is essential to ensure the security and integrity of sensitive information. In 2023, the number of data compromises in the United States stood at 3,205 cases. Meanwhile, over 353 million individuals were affected in the same year by data compromises, including data breaches, leakage, and exposure(Lorenzaj 2024). While these are three different events, they have one thing in common. As a result of all three incidents, the sensitive data is accessed by an unauthorized individual. Moreover, due to the high number of individuals being impacted by countless data breaches, below is a statistical graph published by Statista that explains the annual number of data compromises and individuals impacted in the United States from 2005 to 2023.
+      </p>      
+      <aside class="visual">
+        <div class="image-box">
+
+          <img src="./eg.jpeg" alt="Statista Data Breach Graph" width="100">
+          <br>
+          <p>Statista. Impacts of Data breaches to the people. 2025</p>
+        </div>
+        </aside>
+    </div>
+  </div>   
+
+<br>
+<br>
+<br>
+<hr>  
+
+<div class="clr"></div>
+</body>
+<footer>
+  <p>Copyright &copy; 2025 Krishn Srivastava. All rights reserved.</p>
+</footer>
+
+
+<script>
+  // Fetch the pages.json file and display results
+  async function fetchPages() {
+    try {
+      const response = await fetch('./pages.json'); // Adjust the path as needed
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+      displayPages(data);
+    } catch (error) {
+      console.error('Error fetching pages:', error);
+    }
+  }
+
+  // Display the fetched pages as list items
+  function displayPages(pages) {
+    const listEl = document.querySelector('.search-results');
+    listEl.innerHTML = ''; // Clear previous results
+
+    pages.forEach(page => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `<a href="${page}">${page}</a>`;
+      listEl.appendChild(listItem);
+    });
+  }
+
+  // Perform search based on user input
+  function searchPages(query, pages) {
+    const listEl = document.querySelector('.search-results');
+    listEl.innerHTML = ''; // Clear previous results
+
+    const filteredPages = pages.filter(page => page.toLowerCase().includes(query.toLowerCase()));
+    filteredPages.forEach(page => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `<a href="${page}">${page}</a>`;
+      listEl.appendChild(listItem);
+    });
+  }
+
+  // Event listener for the search input
+  document.querySelector('#searchInput').addEventListener('input', (event) => {
+    const query = event.target.value;
+    if (query.trim()) {
+      fetch('./pages.json')
+        .then(res => res.json())
+        .then(data => searchPages(query, data))
+        .catch(error => console.error('Error performing search:', error));
+    } else {
+      document.querySelector('.search-results').innerHTML = '';
+    }
+  });
+
+  // Initial load to fetch all pages
+  fetchPages();
+</script>
+</html>
+
+
+
